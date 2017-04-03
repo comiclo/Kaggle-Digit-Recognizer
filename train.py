@@ -2,7 +2,8 @@ from preprocessing import load_data
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout, Flatten, Conv2D, AveragePooling2D
 from keras import optimizers
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, History
+import matplotlib.pyplot as plt
 
 train_data, train_labels, test_data = load_data()
 
@@ -31,22 +32,23 @@ model.add(Activation('softmax'))
 model.summary()
 
 model.compile(loss='categorical_crossentropy',
-              # optimizer=optimizers.Adagrad(lr=1e-4),
               optimizer=optimizers.adam(lr=1e-4),
               metrics=['accuracy'])
 
 filepath = 'mnist.model'
-checkpoint= ModelCheckpoint(filepath, save_best_only=True)
+checkpoint = ModelCheckpoint(filepath, save_best_only=True)
+history = History()
 
-history = model.fit(train_data, train_labels,
-                    batch_size=batch_size, nb_epoch=nb_epoch,
-                    verbose=1,
-                    # validation_split=0.1,
-                    callbacks=[checkpoint]
-                    )
+model.fit(train_data, train_labels,
+          batch_size=batch_size, nb_epoch=nb_epoch,
+          verbose=1,
+          validation_split=0.1,
+          callbacks=[checkpoint, history])
+
 
 model.save(filepath)
 
-
-
-print(history.history.keys())
+plt.plot(history.history['acc'])
+plt.plot(history.history['loss'])
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()
