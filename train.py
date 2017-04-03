@@ -35,7 +35,7 @@ model.compile(loss='categorical_crossentropy',
               optimizer=optimizers.adam(lr=1e-4),
               metrics=['accuracy'])
 
-filepath = 'mnist.model'
+filepath = 'mnist.h5'
 checkpoint = ModelCheckpoint(filepath, save_best_only=True)
 history = History()
 

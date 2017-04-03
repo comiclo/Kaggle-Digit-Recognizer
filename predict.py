@@ -2,7 +2,7 @@ import pandas as pd
 from preprocessing import load_data
 from keras.models import load_model
 
-model = load_model('./mnist.model')
+model = load_model('./mnist.h5')
 
 train_data, train_labels, test_data = load_data()
 
