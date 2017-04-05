@@ -8,8 +8,7 @@ import matplotlib.pyplot as plt
 train_data, train_labels, test_data = load_data()
 
 batch_size = 128
-nb_classes = 10
-nb_epoch = 20
+epochs = 20
 
 model = Sequential()
 model.add(Conv2D(32, 5, 5, input_shape=(28, 28, 1),
@@ -40,7 +39,7 @@ checkpoint = ModelCheckpoint(filepath, save_best_only=True)
 history = History()
 
 model.fit(train_data, train_labels,
-          batch_size=batch_size, nb_epoch=nb_epoch,
+          batch_size=batch_size, epochs=epochs,
           verbose=1,
           validation_split=0.1,
           callbacks=[checkpoint, history])
