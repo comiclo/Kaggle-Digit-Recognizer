@@ -11,13 +11,12 @@ batch_size = 128
 epochs = 20
 
 model = Sequential()
-model.add(Conv2D(32, 5, 5, input_shape=(28, 28, 1),
-                 border_mode='same', activation='relu'))
-model.add(AveragePooling2D(border_mode='same'))
+model.add(Conv2D(32, (5, 5), input_shape=(28, 28, 1), padding='same', activation='relu'))
+model.add(AveragePooling2D(padding='same'))
 model.add(Dropout(0.2))
 
-model.add(Conv2D(64, 5, 5, border_mode='same', activation='relu'))
-model.add(AveragePooling2D(border_mode='same'))
+model.add(Conv2D(64, (5, 5), padding='same', activation='relu'))
+model.add(AveragePooling2D(padding='same'))
 model.add(Dropout(0.2))
 
 model.add(Flatten())
