@@ -48,5 +48,5 @@ model.save(filepath)
 
 plt.plot(history.history['acc'])
 plt.plot(history.history['loss'])
-plt.legend(['train', 'test'], loc='upper left')
+plt.legend(['acc', 'loss'], loc='upper left')
 plt.show()
